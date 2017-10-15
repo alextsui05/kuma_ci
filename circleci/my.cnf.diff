@@ -1,0 +1,11 @@
+--- my.cnf	2017-10-14 16:43:15.000000000 -0700
++++ my.cnf.1	2017-10-14 17:11:57.247839174 -0700
+@@ -107,6 +107,8 @@
+ # ssl-cert=/etc/mysql/server-cert.pem
+ # ssl-key=/etc/mysql/server-key.pem
+ 
++innodb_ft_min_token_size = 2
++
+ 
+ 
+ [mysqldump]
