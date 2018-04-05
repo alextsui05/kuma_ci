@@ -7,13 +7,9 @@ RUN sudo apt-get install -y software-properties-common
 # Install basic tools for CircleCI
 RUN sudo apt-get install -y git openssh-client openssh-server
 
-# Install Ruby 2.2.3
 RUN sudo apt-add-repository -y ppa:rael-gc/rvm
 RUN sudo apt-get update
 RUN sudo apt-get install -y rvm
-RUN /bin/bash -l -c "rvm install 2.2.3"
-ENV BUNDLER_VERSION 1.15.1 
-RUN /bin/bash -l -c "gem install bundler --version $BUNDLER_VERSION"
 
 # Install java
 COPY ./jdk1.8.0_144 /opt/jdk1.8.0_144
@@ -32,11 +28,16 @@ RUN echo "mysql-server-5.6 mysql-server/root_password password password" | sudo 
 RUN echo "mysql-server-5.6 mysql-server/root_password_again password password" | sudo debconf-set-selections
 RUN sudo apt-get install -y mysql-server-5.6
 RUN sudo /bin/bash -l -c "cd /etc/mysql && patch -p0 < /var/tmp/circleci/my.cnf.diff"
-RUN echo "source /etc/profile.d/rvm.sh" >> /root/.bashrc
 
 RUN sudo apt install -y libmysqlclient-dev
 RUN sudo apt install -y libcurl4-openssl-dev
 RUN sudo apt install -y mongodb
 RUN sudo apt install -y imagemagick
+
+# Install Ruby 2.2.10
+RUN /bin/bash -l -c "rvm install 2.2.10"
+ENV BUNDLER_VERSION 1.15.1
+RUN /bin/bash -l -c "gem install bundler --version $BUNDLER_VERSION"
+RUN echo "source /etc/profile.d/rvm.sh" >> /root/.bashrc
 
 CMD /bin/bash
