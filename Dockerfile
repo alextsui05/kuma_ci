@@ -35,9 +35,8 @@ RUN sudo apt install -y mongodb
 RUN sudo apt install -y imagemagick
 
 # Install Ruby 2.2.10
-RUN /bin/bash -l -c "rvm install 2.2.10"
-ENV BUNDLER_VERSION 1.15.1
-RUN /bin/bash -l -c "gem install bundler --version $BUNDLER_VERSION"
+RUN /bin/bash -l -c "rvm install 2.3.7"
+RUN /bin/bash -l -c "gem install bundler"
 RUN echo "source /etc/profile.d/rvm.sh" >> /root/.bashrc
 
 CMD /bin/bash
