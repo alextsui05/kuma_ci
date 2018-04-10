@@ -34,6 +34,9 @@ RUN sudo apt install -y libcurl4-openssl-dev
 RUN sudo apt install -y mongodb
 RUN sudo apt install -y imagemagick
 
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+RUN sudo apt install -y nodejs
+
 # Install Ruby 2.2.10
 RUN /bin/bash -l -c "rvm install 2.4.4"
 RUN /bin/bash -l -c "gem install bundler"
