@@ -42,4 +42,6 @@ RUN /bin/bash -l -c "rvm install 2.4.4"
 RUN /bin/bash -l -c "gem install bundler"
 RUN echo "source /etc/profile.d/rvm.sh" >> /root/.bashrc
 
+RUN sudo apt-get install -y libav-tools
+
 CMD /bin/bash
