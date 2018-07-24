@@ -51,4 +51,19 @@ ENV CXXFLAGS="-Wno-narrowing"
 
 RUN chmod +x /usr/local/bin/phantomjs
 
+RUN /bin/bash -l -c "cd /var/tmp && wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.2.tar.gz"
+RUN /bin/bash -l -c "cd /var/tmp && tar -xvf elasticsearch-6.2.2.tar.gz"
+RUN chmod +x /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin
+RUN /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin install analysis-kuromoji
+RUN /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin install analysis-smartcn
+
+RUN groupadd -g 999 kuma
+RUN useradd -r -u 999 -g kuma kuma
+RUN mkhomedir_helper kuma
+RUN chmod -R 777 /var/tmp/elasticsearch-6.2.2
+RUN chmod -R 777 /var/tmp/elasticsearch-1.7.1
+USER kuma
+ENV PATH="/opt/jdk1.8.0_144/bin:${PATH}"
+RUN echo "source /etc/profile.d/rvm.sh" >> /home/kuma/.bashrc
+
 CMD /bin/bash
