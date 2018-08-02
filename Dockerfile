@@ -57,11 +57,12 @@ RUN chmod +x /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin
 RUN /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin install analysis-kuromoji
 RUN /var/tmp/elasticsearch-6.2.2/bin/elasticsearch-plugin install analysis-smartcn
 
-RUN groupadd -g 999 kuma
-RUN useradd -r -u 999 -g kuma kuma
-RUN mkhomedir_helper kuma
+RUN useradd -m kuma && echo "kuma:kuma" | chpasswd && adduser kuma sudo
 RUN chmod -R 777 /var/tmp/elasticsearch-6.2.2
 RUN chmod -R 777 /var/tmp/elasticsearch-1.7.1
+RUN mkdir -p /usr/share/rvm/rubies/ruby-2.4.4/lib/ruby/gems/2.4.0/gems/bundler-1.16.3/exe
+RUN ln -s /usr/share/rvm/rubies/ruby-2.4.4/lib/ruby/gems/2.4.0/gems/bundler-1.16.2/exe/bundle /usr/share/rvm/rubies/ruby-2.4.4/lib/ruby/gems/2.4.0/gems/bundler-1.16.3/exe/bundle
+
 USER kuma
 ENV PATH="/opt/jdk1.8.0_144/bin:${PATH}"
 RUN echo "source /etc/profile.d/rvm.sh" >> /home/kuma/.bashrc
