@@ -78,7 +78,7 @@ RUN useradd -m kuma && echo "kuma:kuma" | chpasswd && adduser kuma sudo
 # COPY ./tmp /var/tmp/tmp
 # RUN chmod 777 /var/tmp/tmp/*
 
-# USER kuma
+USER kuma
 ENV PATH="/opt/jdk1.8.0_191/bin:${PATH}"
 RUN echo "source /etc/profile.d/rvm.sh" >> /home/kuma/.bashrc
 CMD /bin/bash
