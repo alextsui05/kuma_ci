@@ -33,6 +33,7 @@ RUN /bin/bash -l -c "cd /var/tmp && tar -xvf elasticsearch-6.2.4.tar.gz"
 RUN chmod +x /var/tmp/elasticsearch-6.2.4/bin/elasticsearch-plugin
 RUN /var/tmp/elasticsearch-6.2.4/bin/elasticsearch-plugin install analysis-kuromoji
 RUN /var/tmp/elasticsearch-6.2.4/bin/elasticsearch-plugin install analysis-smartcn
+RUN /var/tmp/elasticsearch-6.2.4/bin/elasticsearch-plugin install analysis-icu
 RUN chmod -R 777 /var/tmp/elasticsearch-6.2.4
 
 # # 8.1
